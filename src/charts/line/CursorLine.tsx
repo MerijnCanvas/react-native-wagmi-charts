@@ -10,6 +10,7 @@ import { useLineChart } from './useLineChart';
 type LineChartCursorLineProps = {
   children?: React.ReactNode;
   color?: string;
+  isDashed?: boolean;
   lineProps?: Partial<LineProps>;
 } & Omit<LineChartCursorProps, 'type' | 'children'>;
 
@@ -19,6 +20,7 @@ export function LineChartCursorLine({
   children,
   color = 'gray',
   lineProps,
+  isDashed = false,
   ...cursorProps
 }: LineChartCursorLineProps) {
   const { height } = React.useContext(LineChartDimensionsContext);
@@ -44,7 +46,7 @@ export function LineChartCursorLine({
             y2={height}
             strokeWidth={2}
             stroke={color}
-            strokeDasharray="3 3"
+            strokeDasharray={isDashed ? '3 3' : ''}
             {...lineProps}
           />
         </Svg>
